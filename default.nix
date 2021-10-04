@@ -4,7 +4,7 @@ let
   
   sgx = with pkgs; {
     sgx-sdk = callPackage ./sdk.nix { };
-    ipp-crypto = callPackage ./ipp.nix { };
+    #ipp-crypto = callPackage ./ipp.nix { };
     sgx-ae = callPackage ./ae.nix { };
   };
 in sgx
