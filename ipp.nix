@@ -70,6 +70,7 @@ stdenv.mkDerivation {
     binutils
     python3
   ];
+  enableParallelBuilding = true;
   dontConfigure = true;
   # sgx expects binutils to be under /usr/local/bin by default
   preBuild = ''
@@ -79,7 +80,7 @@ stdenv.mkDerivation {
     runHook preBuild
 
     cd external/ippcp_internal/
-    make
+    make -j 5
     make clean
     make MITIGATION-CVE-2020-0551=LOAD
     make clean
