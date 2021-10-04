@@ -20,6 +20,7 @@
 , perl
 , python3
 , texinfo
+, wget
 }:
 
 stdenv.mkDerivation {
@@ -70,6 +71,7 @@ stdenv.mkDerivation {
     openssl
     perl
     texinfo
+    wget
   ];
   buildInputs = [
     binutils
@@ -83,14 +85,15 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     runHook preBuild
-
-    cd external/ippcp_internal/
-    make
-    make clean
-    make MITIGATION-CVE-2020-0551=LOAD
-    make clean
-    make MITIGATION-CVE-2020-0551=CF
-    cd ../..
+    patchShebangs ./download_prebuilt.sh
+    ./download_prebuilt.sh
+    #cd external/ippcp_internal/
+    #make
+    #make clean
+    #make MITIGATION-CVE-2020-0551=LOAD
+    #make clean
+    #make MITIGATION-CVE-2020-0551=CF
+    #cd ../..
 
     make sdk_install_pkg
 
