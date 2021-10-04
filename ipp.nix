@@ -80,7 +80,7 @@ stdenv.mkDerivation {
     runHook preBuild
 
     cd external/ippcp_internal/
-    make -j 5
+    make
     make clean
     make MITIGATION-CVE-2020-0551=LOAD
     make clean

@@ -78,6 +78,9 @@ stdenv.mkDerivation {
   preBuild = ''
     export BINUTILS_DIR=${binutils}/bin
   '';
+
+  enableParallelBuilding = true;
+
   buildPhase = ''
     runHook preBuild
 
