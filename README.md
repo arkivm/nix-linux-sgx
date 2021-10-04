@@ -21,7 +21,7 @@ https://github.com/NixOS/nixpkgs/pull/126990) . Until then you can install the
 SGX SDK nix package from [cachix](https://cachix.org/) like so:
 
 ```shell
-nix-env -iA sgxsdk -f https://github.com/initc3/nix-linux-sgx/tarball/main \
+nix-env -iA sgx-sdk -f https://github.com/initc3/nix-linux-sgx/tarball/main \
     --substituters https://initc3.cachix.org \
     --trusted-public-keys initc3.cachix.org-1:tt+5+CggCBEur43PcFgrkNxdlOFBnoB01aLe6y6yMcA=
 ```
@@ -49,13 +49,13 @@ pkgs.stdenv.mkDerivation {
     sha256 = "b2...";
   };
   preConfigure = ''
-    export SGX_SDK=${sgx.sgxsdk}/sgxsdk
+    export SGX_SDK=${sgx.sgx-sdk}/sgxsdk
     export PATH=$PATH:$SGX_SDK/bin:$SGX_SDK/bin/x64
     export PKG_CONFIG_PATH=$SGX_SDK/pkgconfig
     export LD_LIBRARY_PATH=$SGX_SDK/sdk_libs
     '';
   buildInputs = with pkgs; [
-    sgx.sgxsdk
+    sgx.sgx-sdk
     # ...
  ```
 
